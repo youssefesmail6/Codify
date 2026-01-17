@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Codify</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main class="app">
+      <header>
+        <h1>&lt;/&gt; Codify</h1>
+        <p class="subtitle">Convert code between programming languages with AI assistance</p>
+      </header>
+
+      <section class="card">
+        <div class="card-header">
+          <span class="input-code">Input Code</span>
+        </div>
+
+        <div class="drop-code">Drop code file here</div>
+
+        <textarea placeholder="// Write code here or drag & drop a file"></textarea>
+
+        <div class="drop-hint">⬆ Drag & drop a code file here</div>
+
+        <div class="controls">
+          <button class="upload-btn">Upload Code File</button>
+          <input type="file" class="file-input" hidden />
+          <span class="file-hint">No file selected</span>
+        </div>
+
+        <div class="languages">
+          <div class="select-group">
+            <label>From Language</label>
+            <select>
+              <option>JavaScript</option>
+              <option>Python</option>
+              <option>Java</option>
+            </select>
+          </div>
+
+          <div class="select-group">
+            <label>To Language</label>
+            <select>
+              <option>Python</option>
+              <option>JavaScript</option>
+              <option>C++</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="convert-btn">Convert Code</button>
+          <button class="reset-btn" onclick="resetBtn()">Reset</button>
+        </div>
+
+        <div class="status success">
+          <span class="icon">✓</span>
+          Code appears to be valid
+        </div>
+      </section>
+
+      <footer class="Copyright">AI Code Converter © 2026</footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
