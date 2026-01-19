@@ -139,3 +139,35 @@ convertBtn.addEventListener("click", async () => {
     setStatusError("AI conversion failed. Try again.");
   }
 });
+textarea.addEventListener("input", () => {
+  const code = textarea.value;
+  if (!code.trim()) return;
+  const detectedLang = detectLanguageKeyword(code);
+
+  if (detectedLang) {
+    fromLang.value = detectedLang;
+  } else {
+    fromLang.value = "";
+  }
+});
+function detectLanguageKeyword(code) {
+  const lowerCode = code.toLowerCase();
+
+  if (lowerCode.includes("console.log") || lowerCode.includes("function") || lowerCode.includes("=>") || lowerCode.includes("var ") || lowerCode.includes("let ") || lowerCode.includes("const ")) {
+    return "JavaScript";
+  }
+  if (lowerCode.includes("def ") || lowerCode.includes("print(") || lowerCode.includes("import ") || lowerCode.includes("elif") || lowerCode.includes("none")) {
+    return "Python";
+  }
+  if (lowerCode.includes("#include") || lowerCode.includes("cout") || lowerCode.includes("std::")) {
+    return "C++";
+  }
+  if (lowerCode.includes("public static void main") || lowerCode.includes("system.out.println")) {
+    return "Java";
+  }
+  if (lowerCode.includes("using system;") || lowerCode.includes("console.writeline")) {
+    return "C#";
+  }
+
+  return "Unknown";
+}
