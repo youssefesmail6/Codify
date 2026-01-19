@@ -159,7 +159,12 @@ convertBtn.addEventListener("click", async () => {
     setStatusError("Invalid code!");
     return;
   }
-    if(fromLang.value === toLang.value ) {
+  // console.log("From Language:", fromLang);
+  // console.log("To Language:", toLang);
+  // console.log("Code:", code);
+  // console.log(toLangSelect.value )
+  // console.log(fromLangSelect.value);
+    if(toLangSelect.value === fromLangSelect.value)  {
       setStatusError("Please select different languages");
       return;
     }
