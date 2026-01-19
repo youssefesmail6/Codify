@@ -19,22 +19,22 @@ backBtn.addEventListener("click", () => {
   window.location.href = "../page1/index.html";
 });
 function getFileExtension(lang) {
-  const extensions = {
-    javascript: "js",
-    python: "py",
-    java: "java",
-    cpp: "cpp",
-    csharp: "cs",
+  const map = {
+    "JavaScript": "js",
+    "Python": "py",
+    "C++": "cpp",
+    "Java": "java",
+    "C#": "cs"
   };
-
-  return extensions[lang] || "txt";
+  return map[lang] || "txt";
 }
 
 downloadBtn.addEventListener("click", function () {
-  const code = convertedCode.textContent;
-  const lang = toLang.value; //اللي هيجي من ال select language from page one
+  const code = convertedCodeEl.textContent;       
+  const lang = outputLangEl.textContent.trim();   
   const extension = getFileExtension(lang);
   const filename = `converted_code.${extension}`;
+  
   const blob = new Blob([code], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -46,3 +46,4 @@ downloadBtn.addEventListener("click", function () {
   URL.revokeObjectURL(url);
   localStorage.clear();
 });
+

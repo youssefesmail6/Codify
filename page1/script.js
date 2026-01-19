@@ -16,9 +16,6 @@ uploadBtn.addEventListener("click", () => {
 fileInput.addEventListener("change", () => {
   handleFile(fileInput.files[0]);
 });
-
-/* ================= Drag & Drop ================= */
-
 textarea.addEventListener("dragover", (e) => {
   e.preventDefault();
   textarea.classList.add("drag-over");
@@ -114,31 +111,7 @@ ${code}
   const data = await response.json();
   return data.choices[0].message.content.trim();
 }
-convertBtn.addEventListener("click", async () => {
-  const code = textarea.value.trim();
-  const fromLang = fromLangSelect.value;
-  const toLang = toLangSelect.value;
 
-  if (!code) {
-    setStatusError("Please enter or upload code first");
-    return;
-  }
-
-  try {
-    setStatusLoading();
-    const convertedCode = await convertCodeAI(code, fromLang, toLang);
-    localStorage.setItem("originalCode", code);
-    localStorage.setItem("convertedCode", convertedCode);
-    localStorage.setItem("fromLang", fromLang);
-    localStorage.setItem("toLang", toLang);
-
-    // Redirect to Page 2
-    window.location.href = "../page2/PageTwo.html";
-  } catch (error) {
-    console.error(error);
-    setStatusError("AI conversion failed. Try again.");
-  }
-});
 textarea.addEventListener("input", () => {
   const code = textarea.value;
   if (!code.trim()) return;
@@ -171,3 +144,56 @@ function detectLanguageKeyword(code) {
 
   return "Unknown";
 }
+
+
+convertBtn.addEventListener("click", async () => {
+  const code = textarea.value.trim();
+  const fromLang = fromLangSelect.value;
+  const toLang = toLangSelect.value;
+
+  if (!code) {
+    setStatusError("Please enter or upload code first");
+    return;
+  }
+  if (!validateCode(code, fromLang)) {
+    setStatusError("Invalid code!");
+    return;
+  }
+    if(fromLang.value === toLang.value ) {
+      setStatusError("Please select different languages");
+      return;
+    }
+
+  try {
+    setStatusLoading();
+    const convertedCode = await convertCodeAI(code, fromLang, toLang);
+    localStorage.setItem("originalCode", code);
+    localStorage.setItem("convertedCode", convertedCode);
+    localStorage.setItem("fromLang", fromLang);
+    localStorage.setItem("toLang", toLang);
+
+    window.location.href = "../page2/PageTwo.html";
+  } catch (error) {
+    console.error(error);
+    setStatusError("AI conversion failed. Try again.");
+  }
+});
+
+function validateCode(code, lang) {
+  if (!code || !code.trim()) return false;
+
+  const languageRules = {
+    "C++": ["#include", "std::", "cout", "int main","return 0",";"],
+    "Java": ["class", "public static void main", "System.out",";"],
+    "C#": ["using System", "class", "static void Main", "Console.WriteLine",";"],
+    "Python": ["def ", "print(", "import ", "if __name__"],
+    "JavaScript": ["function", "=>", "console.log", "let ", "const ", "var "]
+  };
+
+  const rules = languageRules[lang];
+  if (!rules) return false;
+
+
+  return rules.some(keyword => code.includes(keyword));
+}
+
