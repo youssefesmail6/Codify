@@ -37,7 +37,7 @@
         <div class="languages">
           <div class="select-group">
             <label>From Language</label>
-            <select>
+            <select id="fromLang">
               <option>JavaScript</option>
               <option>Python</option>
               <option>C++</option>
@@ -48,7 +48,7 @@
 
           <div class="select-group">
             <label>To Language</label>
-            <select>
+               <select id="toLang">
               <option>JavaScript</option>
               <option>Python</option>
               <option>C++</option>
@@ -60,10 +60,10 @@
 
         <div class="actions">
           <button class="convert-btn">Convert Code</button>
-          <button class="reset-btn" onclick="resetBtn()">Reset</button>
+         <button class="reset-btn">Reset</button>
         </div>
 
-        <div class="status success">
+        <div class="status ready">
           <span class="icon">✓</span>
           Code appears to be valid
         </div>

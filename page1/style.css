@@ -226,3 +226,21 @@ hr {
   margin: 10px;
   opacity: 0.5;
 }
+
+.status.ready {
+  background: #1e3940;
+  border-left-color: #22c55e;
+  color: #e6fffa;
+}
+
+.status.error {
+  background: #3f1e1e;
+  border-left-color: #ef4444;
+  color: #fee2e2;
+}
+
+.status.loading {
+  background: #1e293b;
+  border-left-color: #3b82f6;
+  color: #dbeafe;
+}
