@@ -84,7 +84,7 @@ function resetBtn() {
 resetBtnEl.addEventListener("click", resetBtn);
 
 async function convertCodeAI(code, fromLang, toLang) {
-  const apiKey = "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";
+  const apiKey = "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";
 
   const prompt = `
 Convert the following ${fromLang} code into ${toLang}.
